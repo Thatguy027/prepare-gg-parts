@@ -1,0 +1,10 @@
+gene_name	accession	mutation	notes
+XYL1_K270R	X59465;ABN67152	K270R	S. stipitis xylose reductase, K270R variant
+XYL2	X55392		S. stipitis xylitol dehydrogenase
+XKS1	NM_001181323		S. cerevisiae xylulokinase
+CpXI	WP_012199251		L. phytofermentans xylose isomerase (Lphy_3909)
+BvXI	ABR41556		B. vulgatus ATCC 8482 xylose isomerase (BVU_3953)
+RPE1	P46969		S. cerevisiae ribulose-5-phosphate 3-epimerase (YJL121C)
+TAL1	P15019		S. cerevisiae transaldolase (YLR354C)
+RKI1	Q12189		S. cerevisiae ribose-5-phosphate isomerase (YOR095C)
+TKL1	P23254		S. cerevisiae transketolase 1 (YPR074C)
