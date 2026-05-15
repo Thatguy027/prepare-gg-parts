@@ -24,9 +24,14 @@ INPUT TSV (tab-separated, header required)
   XYL2        XM_001385144               S. stipitis xylitol dehydrogenase
 
   gene_name   Required. Label for output files.
-  accession   Required. NCBI nucleotide or protein accession; semicolon-
-              separated list tried in order (first success wins).
-  mutation    Optional. Point mutations e.g. K270R or K270R;A123V.
+  accession   Required. One of:
+                • NCBI nucleotide or protein accession (e.g. X59465, NP_010457)
+                • UniProt accession (e.g. P12345, Q8IYB7)
+                • Raw amino acid sequence (≥10 residues, no digits)
+              Semicolon-separated list tried in order (first success wins).
+              UniProt and raw AA inputs are back-translated to
+              S. cerevisiae-optimized codons automatically.
+  mutation    Optional. Point mutations e.g. K270R or K270R,A123V (comma-separated).
   notes       Optional. Copied to FASTA headers.
 
 OUTPUT TSV COLUMNS
@@ -43,10 +48,12 @@ USAGE
 import argparse
 import csv
 import datetime
+import json
 import os
 import re
 import sys
 import time
+import urllib.request
 from io import StringIO
 
 from Bio import Entrez, SeqIO
@@ -382,6 +389,79 @@ def design_primers(cds_nt: str) -> tuple:
 # NCBI fetch and validation
 # ─────────────────────────────────────────────────────────────────────────────
 
+def _is_aa_sequence(text: str) -> bool:
+    """Return True if text is a raw amino acid sequence (not an accession).
+
+    Accessions always contain digits; valid AA single-letter codes never do,
+    so digit presence is the primary discriminator.
+    """
+    if len(text) < 10:
+        return False
+    if any(c.isdigit() for c in text):
+        return False
+    clean = text.upper().rstrip('*')
+    return bool(re.fullmatch(r'[ACDEFGHIKLMNPQRSTVWY]+', clean))
+
+
+def _is_uniprot_accession(accession: str) -> bool:
+    acc = accession.split('.')[0].upper()
+    if re.fullmatch(r'[A-NR-Z]\d[A-Z][A-Z0-9]{2}\d', acc):
+        return True
+    if re.fullmatch(r'[OPQ]\d[A-Z0-9]{3}\d', acc):
+        return True
+    return False
+
+
+def _uniprot_fetch(gene_hint: str, accession: str) -> dict | None:
+    """Fetch protein sequence and organism from the UniProt REST API."""
+    acc = accession.split('.')[0].upper()
+    base = f"https://rest.uniprot.org/uniprotkb/{acc}"
+
+    # Protein FASTA
+    try:
+        with urllib.request.urlopen(f"{base}.fasta", timeout=15) as h:
+            fasta_text = h.read().decode('utf-8')
+    except Exception as e:
+        print(f"    [UniProt] FASTA fetch failed for {acc}: {e}", file=sys.stderr)
+        return None
+
+    recs = list(SeqIO.parse(StringIO(fasta_text), 'fasta'))
+    if not recs or len(recs[0].seq) < 10:
+        return None
+    aa = str(recs[0].seq)
+
+    # JSON for organism + gene names
+    species    = 'unknown organism'
+    gene_names = []
+    try:
+        with urllib.request.urlopen(f"{base}.json", timeout=15) as h:
+            data = json.loads(h.read().decode('utf-8'))
+        species = data.get('organism', {}).get('scientificName', species)
+        for gn in data.get('genes', []):
+            if 'geneName' in gn:
+                gene_names.append(gn['geneName'].get('value', ''))
+            for syn in gn.get('synonyms', []):
+                gene_names.append(syn.get('value', ''))
+    except Exception:
+        pass
+
+    rec_ok  = any(gene_hint.lower() in g.lower() for g in gene_names) if gene_names else False
+    val_msg = (f"UniProt record gene names: {gene_names}" if gene_names
+               else f"UniProt fetch OK; no gene names returned for validation")
+
+    bt = back_translate(aa)
+    return dict(
+        cds_nt=bt,
+        protein=aa,
+        species=species,
+        acc_used=f"{acc}_uniprot",
+        back_translated=True,
+        search_validated=False,
+        record_validated=rec_ok,
+        validation_msg=val_msg,
+    )
+
+
 def _ncbi_fetch(db: str, accession: str, rettype: str) -> str | None:
     for attempt in range(3):
         try:
@@ -490,7 +570,25 @@ def fetch_and_validate(gene_name: str, accession: str) -> dict | None:
     """
     gene_hint = re.split(r'[_\-]', gene_name)[0]   # e.g. XYL1 from XYL1_K270R
 
-    # ── Step A: eSearch validation ────────────────────────────────────────────
+    # ── Step A: Raw amino acid sequence — back-translate directly ────────────
+    if _is_aa_sequence(accession):
+        aa = accession.upper().rstrip('*')
+        return dict(
+            cds_nt=back_translate(aa),
+            protein=aa,
+            species='unknown organism',
+            acc_used='aa_seq_input',
+            back_translated=True,
+            search_validated=False,
+            record_validated=False,
+            validation_msg='Raw amino acid sequence provided — back-translated to S. cerevisiae codons',
+        )
+
+    # ── Step B: UniProt — bypass NCBI entirely ────────────────────────────────
+    if _is_uniprot_accession(accession):
+        return _uniprot_fetch(gene_hint, accession)
+
+    # ── Step B: eSearch validation ────────────────────────────────────────────
     search_ok, search_msg = _esearch_validate(gene_hint, accession)
 
     # ── Step B: Fetch record ──────────────────────────────────────────────────
@@ -583,7 +681,7 @@ def parse_tsv(path: str) -> list:
             entries.append({
                 'gene_name':  name,
                 'accessions': [a.strip() for a in accs.split(';') if a.strip()],
-                'mutations':  [m.strip() for m in mut.split(';') if m.strip()],
+                'mutations':  [m.strip() for m in mut.split(',') if m.strip()],
                 'notes':      notes,
             })
     return entries
@@ -811,7 +909,7 @@ def write_summary_tsv(results: list, path: str):
         writer.writerows(ok)
     print(f"\nOutput TSV : {os.path.abspath(path)}  ({len(ok)}/{len(results)} genes OK)")
 
-def write_report(results: list, path: str, input_file: str):
+def write_report(results: list, path: str, input_file: str, cmd_line: str = ''):
     """Write a human-readable pipeline report modelled on pipeline_report.txt."""
     date_str = datetime.date.today().isoformat()
     n_ok     = sum(1 for r in results if r['status'] == 'OK')
@@ -826,6 +924,7 @@ def write_report(results: list, path: str, input_file: str):
         w('GOLDEN GATE PARTS PREPARATION PIPELINE REPORT')
         w(sep)
         w(f'Generated  : {date_str}')
+        w(f'Command    : {cmd_line}')
         w(f'Input file : {os.path.basename(input_file)}')
         w(f'Genes      : {n_ok}/{len(results)} processed successfully')
         w(f'Codon usage: Kazusa S. cerevisiae (taxid 4932)')
@@ -1003,7 +1102,7 @@ def main():
 
     report_out = os.path.join(args.output, 'pipeline_report.txt')
     write_summary_tsv(results, tsv_out)
-    write_report(results, report_out, args.input)
+    write_report(results, report_out, args.input, cmd_line=' '.join(sys.argv))
     print(f"FASTAs     : {os.path.abspath(args.output)}/")
 
     n_ok = sum(1 for r in results if r['status'] == 'OK')

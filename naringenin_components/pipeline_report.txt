@@ -1,0 +1,291 @@
+GOLDEN GATE PARTS PREPARATION PIPELINE REPORT
+======================================================================
+Generated  : 2026-05-11
+Command    : prepare_gg_parts.py genes_template_naringenin.tsv --output naringenin_components --email szdralje@g.ucla.edu
+Input file : genes_template_naringenin.tsv
+Genes      : 12/12 processed successfully
+Codon usage: Kazusa S. cerevisiae (taxid 4932)
+RE scanned : BsaI (GGTCTC/GAGACC), BsmBI (CGTCTC/GAGACG)
+GG format  : 5'-CGGTCTCAT·[GOI]·ATCCTGAGACCG-3'
+Overhangs  : 5' TATG (incl. ATG start)  |  3' ATCC
+
+SUMMARY TABLE
+----------------------------------------------------------------------
+Gene             Accession                  AA     NT  Chgd Sites   Score  Status
+----------------------------------------------------------------------
+XlnR             Q5AVS0_uniprot            900   2703     0     1  100.0%  OK
+XylR_bl          P70928_uniprot            390   1173     0     0  100.0%  OK
+XylR_cv          Q9A3Y5_uniprot            351   1056     0     0  100.0%  OK
+seTAL            Q2EYY5_uniprot            510   1533     0     0  100.0%  OK
+4CL2             P14913_uniprot            544   1635     0     0  100.0%  OK
+4CL2_ARATH       Q9S725_uniprot            556   1671     0     0  100.0%  OK
+SjCHS1_a         aa_seq_input              391   1176     0     1  100.0%  OK
+SjCHS1_b         aa_seq_input              389   1170     0     1  100.0%  OK
+CHI              P28012_uniprot            222    669     0     0  100.0%  OK
+ARO4             P32449_uniprot            370   1113     0     0  100.0%  OK
+ARO7             P32178_uniprot            256    771     0     0  100.0%  OK
+ACC1             Q00955_uniprot           2233   6702     0     1  100.0%  OK
+
+DETAILED RESULTS
+======================================================================
+
+Gene: XlnR
+  Species   : Emericella nidulans (strain FGSC A4 / ATCC 38163 / CBS 112.46 / NRRL 194 / M139)
+  Accession : Q5AVS0_uniprot
+  Status    : OK
+  Source CDS: 2703 nt (back-translated from protein)
+  Optimized : 2703 nt, 900 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 1 removed (0 remain)
+  Site edits:
+    BsaI_rev at 1295–1301 — codon 432: TTG→TTA (L, 14.1/1000)
+  Validation: PASS (record qualifiers)
+  Fwd primer: CGGTCTCATATGTCTACTACTTCTTTGCAACAATTCGCT
+    (39 nt | binding Tm ≈ 57.5°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTAAGACAAAGCCAAACCAGTACCATCACC
+    (42 nt | binding Tm ≈ 60.3°C | overhang: ATCC)
+  PCR product: 2724 nt
+
+Gene: XylR_bl
+  Species   : Bacillus licheniformis
+  Accession : P70928_uniprot
+  Status    : OK
+  Source CDS: 1173 nt (back-translated from protein)
+  Optimized : 1173 nt, 390 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 0 removed (0 remain)
+  Validation: PASS (record qualifiers)
+  Fwd primer: CGGTCTCATATGATTGATATTGAATACGCTGATCAAGCT
+    (39 nt | binding Tm ≈ 56.2°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTAGAATCTTTCGTTCATGAATCTTTCCAA
+    (42 nt | binding Tm ≈ 54.8°C | overhang: ATCC)
+  PCR product: 1194 nt
+
+Gene: XylR_cv
+  Species   : Caulobacter vibrioides (strain ATCC 19089 / CIP 103742 / CB 15)
+  Accession : Q9A3Y5_uniprot
+  Status    : OK
+  Source CDS: 1056 nt (back-translated from protein)
+  Optimized : 1056 nt, 351 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 0 removed (0 remain)
+  Validation: PASS (record qualifiers)
+  Fwd primer: CGGTCTCATATGAACCAACCAGTTGAAAGACAAAGAAGA
+    (39 nt | binding Tm ≈ 57.5°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTAAACACCAGCTGGACCAGAAGAATCTC
+    (41 nt | binding Tm ≈ 60.1°C | overhang: ATCC)
+  PCR product: 1077 nt
+
+Gene: seTAL
+  Species   : Saccharothrix espanaensis
+  Accession : Q2EYY5_uniprot
+  Status    : OK
+  Source CDS: 1533 nt (back-translated from protein)
+  Optimized : 1533 nt, 510 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 0 removed (0 remain)
+  Validation: WARNING — not confirmed; verify accession
+  Fwd primer: CGGTCTCATATGACTCAAGTTGTTGAAAGACAAGCTGAT
+    (39 nt | binding Tm ≈ 57.5°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTAACCGAAATCTTTACCATCAGCTTCATC
+    (42 nt | binding Tm ≈ 57.5°C | overhang: ATCC)
+  PCR product: 1554 nt
+
+Gene: 4CL2
+  Species   : Petroselinum crispum
+  Accession : P14913_uniprot
+  Status    : OK
+  Source CDS: 1635 nt (back-translated from protein)
+  Optimized : 1635 nt, 544 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 0 removed (0 remain)
+  Validation: PASS (record qualifiers)
+  Fwd primer: CGGTCTCATATGGGTGATTGTGTTGCTCCAAAAGAAGAT
+    (39 nt | binding Tm ≈ 58.9°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTATTTTGGCAAATCACCAGAAGCAATTTT
+    (42 nt | binding Tm ≈ 54.8°C | overhang: ATCC)
+  PCR product: 1656 nt
+
+Gene: 4CL2_ARATH
+  Species   : Arabidopsis thaliana
+  Accession : Q9S725_uniprot
+  Status    : OK
+  Source CDS: 1671 nt (back-translated from protein)
+  Optimized : 1671 nt, 556 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 0 removed (0 remain)
+  Validation: PASS (record qualifiers)
+  Fwd primer: CGGTCTCATATGACTACTCAAGATGTTATTGTTAACGAT
+    (39 nt | binding Tm ≈ 54.8°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTAGTTCATCAAACCGTTAGCCAATCTAGC
+    (42 nt | binding Tm ≈ 58.9°C | overhang: ATCC)
+  PCR product: 1692 nt
+
+Gene: SjCHS1_a
+  Species   : unknown organism
+  Accession : aa_seq_input
+  Status    : OK
+  Source CDS: 1176 nt (back-translated from protein)
+  Optimized : 1176 nt, 391 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 1 removed (0 remain)
+  Mutations : S208N (TCT→AAC at nt 622-624)
+  Site edits:
+    BsaI_rev at 449–455 — codon 150: TTG→TTA (L, 14.1/1000)
+  Validation: WARNING — not confirmed; verify accession
+  Fwd primer: CGGTCTCATATGGTTACTGTTGAAGAAATTAGAAACGCT
+    (39 nt | binding Tm ≈ 56.2°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTAACCTTGCAATGGAACAGAATGCAAAAC
+    (42 nt | binding Tm ≈ 57.5°C | overhang: ATCC)
+  PCR product: 1197 nt
+
+Gene: SjCHS1_b
+  Species   : unknown organism
+  Accession : aa_seq_input
+  Status    : OK
+  Source CDS: 1170 nt (back-translated from protein)
+  Optimized : 1170 nt, 389 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 1 removed (0 remain)
+  Mutations : S208N (TCT→AAC at nt 622-624)
+  Site edits:
+    BsaI_rev at 449–455 — codon 150: TTG→TTA (L, 14.1/1000)
+  Validation: WARNING — not confirmed; verify accession
+  Fwd primer: CGGTCTCATATGGTTTCTGTTCAAGAAATTAGAAAAGCT
+    (39 nt | binding Tm ≈ 54.8°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTAAGCAGCAACAGAATGCAAAACAACAGT
+    (42 nt | binding Tm ≈ 57.5°C | overhang: ATCC)
+  PCR product: 1191 nt
+
+Gene: CHI
+  Species   : Medicago sativa
+  Accession : P28012_uniprot
+  Status    : OK
+  Source CDS: 669 nt (back-translated from protein)
+  Optimized : 669 nt, 222 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 0 removed (0 remain)
+  Validation: PASS (record qualifiers)
+  Fwd primer: CGGTCTCATATGGCTGCTTCTATTACTGCTATTACTGTT
+    (39 nt | binding Tm ≈ 57.5°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTAGTTACCAATTTTGAAAGCACCTTCGTT
+    (42 nt | binding Tm ≈ 56.2°C | overhang: ATCC)
+  PCR product: 690 nt
+
+Gene: ARO4
+  Species   : Saccharomyces cerevisiae (strain ATCC 204508 / S288c)
+  Accession : P32449_uniprot
+  Status    : OK
+  Source CDS: 1113 nt (back-translated from protein)
+  Optimized : 1113 nt, 370 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 0 removed (0 remain)
+  Mutations : K229L (AAA→TTG at nt 685-687)
+  Validation: PASS (record qualifiers)
+  Fwd primer: CGGTCTCATATGTCTGAATCTCCAATGTTCGCTGCTAAC
+    (39 nt | binding Tm ≈ 60.3°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTATTTTTTGTTAACTTCTCTTCTTTGTCT
+    (42 nt | binding Tm ≈ 52.1°C | overhang: ATCC)
+  PCR product: 1134 nt
+
+Gene: ARO7
+  Species   : Saccharomyces cerevisiae (strain ATCC 204508 / S288c)
+  Accession : P32178_uniprot
+  Status    : OK
+  Source CDS: 771 nt (back-translated from protein)
+  Optimized : 771 nt, 256 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 0 removed (0 remain)
+  Mutations : G141S (GGT→TCT at nt 421-423)
+  Validation: PASS (record qualifiers)
+  Fwd primer: CGGTCTCATATGGATTTCACTAAACCAGAAACTGTTTTG
+    (39 nt | binding Tm ≈ 56.2°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTATTCTTCCAATCTTCTCAACAAGTATTC
+    (42 nt | binding Tm ≈ 54.8°C | overhang: ATCC)
+  PCR product: 792 nt
+
+Gene: ACC1
+  Species   : Saccharomyces cerevisiae (strain ATCC 204508 / S288c)
+  Accession : Q00955_uniprot
+  Status    : OK
+  Source CDS: 6702 nt (back-translated from protein)
+  Optimized : 6702 nt, 2233 aa
+  Opt score : 100.0%  |  Codons changed: 0
+  RE sites  : 1 removed (0 remain)
+  Mutations : S659A (TCT→GCT at nt 1975-1977); S1157A (TCT→GCT at nt 3469-3471)
+  Site edits:
+    BsaI_rev at 4439–4445 — codon 1480: TTG→TTA (L, 14.1/1000)
+  Validation: PASS (record qualifiers)
+  Fwd primer: CGGTCTCATATGTCTGAAGAATCTTTGTTCGAATCTTCT
+    (39 nt | binding Tm ≈ 56.2°C | overhang: TATG)
+  Rev primer: CGGTCTCAGGATTTATTTCAAAGTTTTCAACAATTTTTCTTT
+    (42 nt | binding Tm ≈ 49.3°C | overhang: ATCC)
+  PCR product: 6723 nt
+
+NOTES
+======================================================================
+
+Codon optimization:
+  For each amino acid the highest-frequency S. cerevisiae codon was
+  selected (Kazusa taxid 4932, relative frequency threshold ≥ 10%).
+  Stop codons use TAA (most common in yeast). The ATG start codon is
+  always preserved. BsaI/BsmBI sites are removed by synonymous
+  substitution choosing the next-highest-frequency alternative.
+
+Primer design:
+  Forward: 5'-CGGTCTCAT-[binding]-3'
+    CGGTCTC = BsaI recognition | A = spacer | T completes TATG overhang.
+    Binding starts at ATG (codon 1). Length adjusted from 18 to 30 nt
+    until binding-region Tm ≥ 60°C (Wallace rule).
+  Reverse: 5'-CGGTCTCAGGAT-[binding_RC]-3'
+    GGAT = RC of ATCC overhang. Binding is RC of 3' end of CDS
+    (includes stop codon). Same Tm target.
+  PCR product top strand: CGGTCTCATATG-[GOI]-ATCCTGAGACCG
+  After BsaI digestion: TATG 5' overhang (5') and ATCC 5' overhang (3').
+
+Back-translated genes:
+  XlnR: native bacterial/non-standard CDS not used.
+    Protein fetched from Q5AVS0_uniprot; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+  XylR_bl: native bacterial/non-standard CDS not used.
+    Protein fetched from P70928_uniprot; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+  XylR_cv: native bacterial/non-standard CDS not used.
+    Protein fetched from Q9A3Y5_uniprot; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+  seTAL: native bacterial/non-standard CDS not used.
+    Protein fetched from Q2EYY5_uniprot; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+  4CL2: native bacterial/non-standard CDS not used.
+    Protein fetched from P14913_uniprot; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+  4CL2_ARATH: native bacterial/non-standard CDS not used.
+    Protein fetched from Q9S725_uniprot; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+  SjCHS1_a: native bacterial/non-standard CDS not used.
+    Protein fetched from aa_seq_input; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+  SjCHS1_b: native bacterial/non-standard CDS not used.
+    Protein fetched from aa_seq_input; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+  CHI: native bacterial/non-standard CDS not used.
+    Protein fetched from P28012_uniprot; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+  ARO4: native bacterial/non-standard CDS not used.
+    Protein fetched from P32449_uniprot; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+  ARO7: native bacterial/non-standard CDS not used.
+    Protein fetched from P32178_uniprot; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+  ACC1: native bacterial/non-standard CDS not used.
+    Protein fetched from Q00955_uniprot; CDS back-translated using best yeast codons.
+    Original and optimized FASTA are identical (0 codon changes).
+
+Point mutations applied:
+  SjCHS1_a: S208N (TCT→AAC at nt 622-624)
+  SjCHS1_b: S208N (TCT→AAC at nt 622-624)
+  ARO4: K229L (AAA→TTG at nt 685-687)
+  ARO7: G141S (GGT→TCT at nt 421-423)
+  ACC1: S659A (TCT→GCT at nt 1975-1977)
+  ACC1: S1157A (TCT→GCT at nt 3469-3471)
+
